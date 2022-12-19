@@ -1,0 +1,32 @@
+﻿@using TeknolojiAmbari.Mvc.WebUI.Models;
+@model IEnumerable<ProductModel>
+
+
+<div class="row">
+    <div class="grid">
+        @foreach (var urun in Model)
+        {
+                <div class="card mr-4 mb-4">
+                    <img class="card-img-top" src="/Upload/@urun.Image" alt="@urun.Name" height="300">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="/Home/Details/@urun.Id">@urun.Name</a>
+                        </h4>
+                        <p class="card-text pt-2">
+                            @urun.Description
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted product-price">
+                            <i class="fa-solid fa-dollar-sign"> 
+                            @urun.Price
+                            </i>
+                        </small>
+                        <a href="/Home/Details/@urun.Id" class="btn btn-default btn-sm float-right">
+                            Ürünü İncele <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </div>
+                </div>
+        }
+    </div>
+</div>

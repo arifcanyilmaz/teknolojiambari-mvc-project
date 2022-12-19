@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TeknolojiAmbari.Mvc.WebUI.Entity
+namespace TeknolojiAmbari.Mvc.WebUI.Models
 {
-    public class Product
+    public class ProductModel
     {
         public int Id { get; set; }
 
@@ -19,11 +19,6 @@ namespace TeknolojiAmbari.Mvc.WebUI.Entity
 
         public string Image { get; set; }
 
-        public bool IsHome { get; set; }
-        public bool IsApproved { get; set; }
-
         public int CategoryId { get; set; }
-
-        public Category Category { get; set; }
     }
 }
