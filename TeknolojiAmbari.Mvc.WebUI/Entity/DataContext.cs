@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using TeknolojiAmbari.Mvc.WebUI.Identity;
 
 namespace TeknolojiAmbari.Mvc.WebUI.Entity
 {
@@ -10,7 +12,7 @@ namespace TeknolojiAmbari.Mvc.WebUI.Entity
     {
         public DataContext() : base("dataConnection")
         {
-            Database.SetInitializer(new DataInitializer());
+            
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

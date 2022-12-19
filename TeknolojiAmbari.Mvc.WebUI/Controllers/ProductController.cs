@@ -10,6 +10,7 @@ using TeknolojiAmbari.Mvc.WebUI.Entity;
 
 namespace TeknolojiAmbari.Mvc.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ProductController : Controller
     {
         private DataContext db = new DataContext();

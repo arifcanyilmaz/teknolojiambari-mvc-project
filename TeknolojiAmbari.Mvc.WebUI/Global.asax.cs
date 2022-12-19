@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using TeknolojiAmbari.Mvc.WebUI.Entity;
+using TeknolojiAmbari.Mvc.WebUI.Identity;
 
 namespace TeknolojiAmbari.Mvc.WebUI
 {
@@ -13,6 +16,9 @@ namespace TeknolojiAmbari.Mvc.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Database.SetInitializer(new DataInitializer());
+            Database.SetInitializer(new IdentityInitializer());
         }
     }
 }
