@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,8 +11,11 @@ namespace TeknolojiAmbari.Mvc.WebUI.Entity
     {
         public int Id { get; set; }
 
+        [DisplayName("Kategori Adı")]
+        [StringLength(maximumLength:30,ErrorMessage ="En fazla 30 karakter girebilirsiniz.")]
         public string Name { get; set; }
 
+        [DisplayName("Açıklama")]
         public string Description { get; set; }
 
         public List<Product> Products { get; set; }
