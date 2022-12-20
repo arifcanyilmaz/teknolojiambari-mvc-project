@@ -22,8 +22,8 @@ namespace TeknolojiAmbari.Mvc.WebUI.Models
         public string UserName { get; set; }
 
         [Required]
-        [DisplayName("E-mail")]
-        [EmailAddress(ErrorMessage = "Hatalı E-mail adresi!")]
+        [DisplayName("Eposta")]
+        [EmailAddress(ErrorMessage = "Hatalı Eposta adresi!")]
         public string Email { get; set; }
 
         [Required]
@@ -33,6 +33,6 @@ namespace TeknolojiAmbari.Mvc.WebUI.Models
         [Required]
         [DisplayName("Şifre Tekrar")]
         [Compare("Password",ErrorMessage = "Şifreleriniz uyuşmuyor!")]
-        public int RePassword { get; set; }
+        public string RePassword { get; set; }
     }
 }

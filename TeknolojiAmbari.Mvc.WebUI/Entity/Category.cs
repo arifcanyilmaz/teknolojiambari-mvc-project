@@ -12,7 +12,7 @@ namespace TeknolojiAmbari.Mvc.WebUI.Entity
         public int Id { get; set; }
 
         [DisplayName("Kategori Adı")]
-        [StringLength(maximumLength:30,ErrorMessage ="En fazla 30 karakter girebilirsiniz.")]
+        [StringLength(maximumLength:20 ,ErrorMessage = "En fazla 30 karakter girebilirsiniz.")]
         public string Name { get; set; }
 
         [DisplayName("Açıklama")]

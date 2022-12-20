@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeknolojiAmbari.Mvc.WebUI.Entity;
 using TeknolojiAmbari.Mvc.WebUI.Identity;
 using TeknolojiAmbari.Mvc.WebUI.Models;
 
@@ -13,16 +14,19 @@ namespace TeknolojiAmbari.Mvc.WebUI.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<ApplicationUser> UserManager;
-        private RoleManager<ApplicationRole> RoleManager;
+        private DataContext db = new DataContext();
+
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         public AccountController()
         {
             var userStore = new UserStore<ApplicationUser>(new IdentityDataContext());
-            UserManager = new UserManager<ApplicationUser>(userStore);
+            _userManager = new UserManager<ApplicationUser>(userStore);
 
             var roleStore = new RoleStore<ApplicationRole>(new IdentityDataContext());
-            RoleManager = new RoleManager<ApplicationRole>(roleStore);
+            _roleManager = new RoleManager<ApplicationRole>(roleStore);
+
         }
 
         // GET: Account
@@ -31,39 +35,40 @@ namespace TeknolojiAmbari.Mvc.WebUI.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(Register model)
         {
             if (ModelState.IsValid)
             {
+                //Kayıt işlemleri
+
                 var user = new ApplicationUser();
                 user.Name = model.Name;
-                user.SurName = model.SurName;
+                user.Surname = model.SurName;
                 user.Email = model.Email;
                 user.UserName = model.UserName;
 
-                var result = UserManager.Create(user, model.Password);
+                var result = _userManager.Create(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    if (RoleManager.RoleExists("user"))
+                    //kullanıcı oluştu ve kullanıcıyı bir role atayabilirsiniz.
+                    if (_roleManager.RoleExists("user"))
                     {
-                        UserManager.AddToRole(user.Id, "user");
+                        _userManager.AddToRole(user.Id, "user");
                     }
                     return RedirectToAction("Login", "Account");
                 }
                 else
                 {
-                    ModelState.AddModelError("RegisterUserError", "Kullanıcı oluşturma hatası!");
+                    ModelState.AddModelError("RegisterUserError", "Kullanıcı  oluşturma hatası.");
                 }
+
             }
 
             return View(model);
         }
-
-
 
         // GET: Account
         public ActionResult Login()
@@ -71,19 +76,22 @@ namespace TeknolojiAmbari.Mvc.WebUI.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(Login model, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = UserManager.Find(model.UserName, model.Password);
+                //Login işlemleri
+                var user = _userManager.Find(model.UserName, model.Password);
 
                 if (user != null)
                 {
+                    // varolan kullanıcıyı sisteme dahil et.
+                    // ApplicationCookie oluşturup sisteme bırak.
+
                     var authManager = HttpContext.GetOwinContext().Authentication;
-                    var identityclaims = UserManager.CreateIdentity(user, "ApplicaitonCookie");
+                    var identityclaims = _userManager.CreateIdentity(user, "ApplicationCookie");
                     var authProperties = new AuthenticationProperties();
                     authProperties.IsPersistent = model.RememberMe;
                     authManager.SignIn(authProperties, identityclaims);
@@ -97,12 +105,12 @@ namespace TeknolojiAmbari.Mvc.WebUI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("LoginUserError", "Böyle bir kullanıcı yok!");
+                    ModelState.AddModelError("LoginUserError", "Böyle bir kullanıcı yok.");
                 }
             }
+
             return View(model);
         }
-
 
         public ActionResult Logout()
         {
@@ -111,6 +119,5 @@ namespace TeknolojiAmbari.Mvc.WebUI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

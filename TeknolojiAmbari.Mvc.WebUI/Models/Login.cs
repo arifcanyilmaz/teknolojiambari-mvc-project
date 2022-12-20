@@ -18,7 +18,6 @@ namespace TeknolojiAmbari.Mvc.WebUI.Models
         [DisplayName("Şifre")]
         public string Password { get; set; }
 
-        [Required]
         [DisplayName("Beni Hatırla")]
         public bool RememberMe { get; set; }
 

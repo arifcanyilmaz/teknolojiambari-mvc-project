@@ -13,7 +13,7 @@ namespace TeknolojiAmbari.Mvc.WebUI.Identity
     {
         protected override void Seed(IdentityDataContext context)
         {
-            //Roller
+            // Rolleri
             if (!context.Roles.Any(i => i.Name == "admin"))
             {
                 var store = new RoleStore<ApplicationRole>(context);
@@ -30,27 +30,27 @@ namespace TeknolojiAmbari.Mvc.WebUI.Identity
                 manager.Create(role);
             }
 
-            //User
-            if (!context.Users.Any(i => i.Name == "arifcanyılmaz"))
+            if (!context.Users.Any(i => i.Name == "arifyilmaz"))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser() { Name = "arif",SurName="yılmaz",UserName="wisemann",Email="wisemann@gmail.com"};
+                var user = new ApplicationUser() { Name = "arif", Surname = "yılmaz", UserName = "arifyilmaz", Email = "arifyilmaz@gmail.com" };
 
-                manager.Create(user,"114521");
+                manager.Create(user, "114521");
                 manager.AddToRole(user.Id, "admin");
                 manager.AddToRole(user.Id, "user");
             }
 
-            if (!context.Users.Any(i => i.Name == "doğukanberke"))
+            if (!context.Users.Any(i => i.Name == "muzafferyilmaz"))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser() { Name = "doğukan", SurName = "berke", UserName = "dogi", Email = "dogi@gmail.com" };
+                var user = new ApplicationUser() { Name = "muzaffer", Surname = "yılmaz", UserName = "muzafferyilmaz", Email = "muzafferyilmaz@gmail.com" };
 
                 manager.Create(user, "114521");
                 manager.AddToRole(user.Id, "user");
             }
+
 
 
             base.Seed(context);
