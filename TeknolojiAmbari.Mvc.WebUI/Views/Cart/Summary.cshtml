@@ -1,0 +1,21 @@
+﻿@model TeknolojiAmbari.Mvc.WebUI.Models.Cart
+
+
+<style>
+    #cart{
+        color:white;
+        font-size: 13px;
+    }
+</style>
+
+<ul class="navbar-nav  my-2 my-lg-0">
+    <li class="nav-item ">
+        <a class="nav-link" href="/Cart">
+            <i id="cart" class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                (@Model.CartLines.Count)
+        </a>
+    </li>
+    
+</ul>
+
+
